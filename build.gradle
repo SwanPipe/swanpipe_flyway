@@ -17,6 +17,7 @@ description ="""
 Flyway DB Migration for SwanPipe : ${project.name}"""
 
 apply plugin: 'application'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 
@@ -52,4 +53,15 @@ flyway {
     password = 'password'
     schemas = [ 'public' ]
 }
+
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
 
