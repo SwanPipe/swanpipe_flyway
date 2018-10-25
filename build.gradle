@@ -1,0 +1,55 @@
+import org.flywaydb.gradle.task.*
+
+buildscript {
+
+    dependencies {
+        classpath 'org.postgresql:postgresql:42.1.4'
+    }
+}
+
+plugins {
+    id "org.flywaydb.flyway" version "5.1.4"
+    id 'java'
+}
+
+group = 'com.swanpipe'
+description ="""
+Flyway DB Migration for SwanPipe : ${project.name}"""
+
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+}
+
+jar {
+
+    /**
+     *  Create a fat jar
+     */
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree( it ) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/postgres'
+    user = 'postgres'
+    password = 'password'
+    schemas = [ 'public' ]
+}
+
