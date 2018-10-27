@@ -10,14 +10,12 @@ buildscript {
 plugins {
     id "org.flywaydb.flyway" version "5.1.4"
     id 'java'
+    id 'maven'
 }
 
 group = 'com.swanpipe'
 description ="""
 Flyway DB Migration for SwanPipe : ${project.name}"""
-
-apply plugin: 'application'
-apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 
@@ -54,14 +52,5 @@ flyway {
     schemas = [ 'public' ]
 }
 
-
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
-}
 
 
