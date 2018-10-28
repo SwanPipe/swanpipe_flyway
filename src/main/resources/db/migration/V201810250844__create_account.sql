@@ -6,7 +6,8 @@
  */
 create table account (
   id serial primary key,
-  enabled boolean default true
+  enabled boolean default true,
+  created timestamp default now()
 );
 
 /*
@@ -18,6 +19,7 @@ create table login (
   account_id integer not null references account( id ),
   password text not null,
   enabled boolean default true,
+  created timestamp default now(),
   last_successful_login timestamp,
   last_failed_login timestamp
 );
@@ -30,5 +32,6 @@ create table login (
 create table persona (
   id text not null primary key,
   account_id integer not null references account( id ),
-  display_name text
+  display_name text,
+  created timestamp default now()
 );
