@@ -5,9 +5,9 @@
  personas (multiple personalities).
  */
 create table account (
-  id serial primary key,
-  enabled boolean default true,
-  created timestamp default now()
+  id serial not null primary key,
+  enabled boolean not null default true,
+  created timestamp not null default now()
 );
 
 /*
@@ -18,8 +18,8 @@ create table login (
   id text not null primary key,
   account_id integer not null references account( id ),
   password text not null,
-  enabled boolean default true,
-  created timestamp default now(),
+  enabled boolean not null default true,
+  created timestamp not null default now(),
   last_successful_login timestamp,
   last_failed_login timestamp
 );
@@ -33,5 +33,5 @@ create table persona (
   id text not null primary key,
   account_id integer not null references account( id ),
   display_name text,
-  created timestamp default now()
+  created timestamp not null default now()
 );
