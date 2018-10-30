@@ -25,6 +25,10 @@ repositories {
 }
 
 dependencies {
+    
+    // https://mvnrepository.com/artifact/com.opentable.components/otj-pg-embedded
+    testCompile group: 'com.opentable.components', name: 'otj-pg-embedded', version: '0.12.4'
+
 }
 
 jar {
